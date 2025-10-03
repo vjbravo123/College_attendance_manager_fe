@@ -11,9 +11,7 @@ export default function StudentSignupPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Call your signup API here. For demo we just console.log and navigate.
     console.log("Signup:", form);
-    // Simulate successful signup -> go to students login
     navigate("/studentslogin");
   };
 
