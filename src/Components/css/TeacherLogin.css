@@ -1,10 +1,4 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', 'Roboto', sans-serif;
-}
+
 
 /* Container */
 .login-container {
@@ -17,7 +11,7 @@
 }
 
 /* Card */
-.login-card {
+.login-container .login-card {
     background: #fff;
     padding: 50px 40px;
     border-radius: 12px;
@@ -28,26 +22,26 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-card:hover {
+.login-container .login-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 14px 30px rgba(0,0,0,0.12);
 }
 
-.login-card h2 {
+.login-container .login-card h2 {
     font-size: 24px;
     margin-bottom: 10px;
     color: #1e1e2f;
     font-weight: 600;
 }
 
-.login-card p {
+.login-container .login-card p {
     font-size: 14px;
     color: #6b6b7b;
     margin-bottom: 25px;
 }
 
 /* Inputs */
-.login-input {
+.login-container .login-input {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 18px;
@@ -58,13 +52,13 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-input:focus {
+.login-container .login-input:focus {
     border-color: #2f80ed;
     box-shadow: 0 0 5px rgba(47, 128, 237, 0.4);
 }
 
 /* Button */
-.login-btn {
+.login-container .login-btn {
     width: 100%;
     padding: 14px;
     font-size: 16px;
@@ -77,31 +71,31 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-btn:hover {
+.login-container .login-btn:hover {
     background-color: #1366d6;
     transform: translateY(-2px);
 }
 
 /* Responsive */
 @media (max-width: 480px) {
-    .login-card {
+   .login-container .login-card {
         padding: 35px 25px;
     }
 
-    .login-card h2 {
+   .login-container .login-card h2 {
         font-size: 20px;
     }
 
-    .login-card p {
+   .login-container .login-card p {
         font-size: 13px;
     }
 
-    .login-input {
+   .login-container .login-input {
         font-size: 13px;
         padding: 10px 12px;
     }
 
-    .login-btn {
+   .login-container .login-btn {
         font-size: 15px;
         padding: 12px;
     }

@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
+import "./index.css"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import StudentLogin from './Components/StudentLogin.jsx'
 import TeacherLogin from './Components/TeacherLogin.jsx'
@@ -11,6 +12,8 @@ import store from './Store/Store.js'
 import {Provider} from 'react-redux';
 import StudentDashboard from './Components/StudentDashboard.jsx'
 import SubjectAttendance from './Components/SubjectAttendance.jsx'
+import TeacherWelcome from './Components/TeacherPage.jsx'
+import StudentWelcome from './Components/StudentPage.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
   {
     path:'/Teacherlogin',
     element:<TeacherLogin/>
+  },
+  {
+    path:'/TeacherWelcome',
+    element:<TeacherWelcome/>
+  },
+  {
+    path:'/StudentWelcome',
+    element:<StudentWelcome/>
   },
   {
     path:'/TeacherDashboard',

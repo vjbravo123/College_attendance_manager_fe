@@ -1,20 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import './css/Header.css';
-
+import React from 'react'
+import { Link } from 'react-router-dom'
 const Header = () => {
   return (
-    <header>
-      <h1>Attendance Manager</h1>
-      <nav>
-        <Link to="/dashboard" className="nav-link">Dashboard</Link>
-        <Link to="/subjects" className="nav-link">Subjects</Link>
-        <Link to="/students" className="nav-link">Students</Link>
-        <Link to="/reports" className="nav-link">Reports</Link>
-        <Link to="/settings" className="nav-link">Settings</Link>
-      </nav>
-    </header>
-  );
-};
+     <nav
+      style={{ fontFamily: "Montserrat" }}
+      className="fixed top-5 left-1/2 -translate-x-1/2 w-[80%] z-50 
+                 bg-white/60 backdrop-blur-md shadow-md rounded-lg"
+    >
+      <div className="flex items-center justify-between px-6 py-3">
+        
+        {/* Logo */}
+        <img
+          src="https://exciting-python.10web.cloud/wp-content/uploads/2025/10/logo_1fiB52wV.svg"
+          alt="logo"
+          className="h-8" // smaller logo
+        />
 
-export default Header;
+        {/* Links */}
+        <div className="hidden md:flex gap-10  text-gray-800 font-medium"> {/* larger font */}
+          <Link to="/TeacherWelcome" className="hover:text-blue-600">Teacher Login</Link>
+          <Link to="/StudentWelcome" className="hover:text-blue-600">Student Login</Link>
+          <a href='#about' className="hover:text-blue-600">About</a>
+          <a href="#contact" className="hover:text-blue-600">Contact</a>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3">
+          <Link to="/">
+            <button className="px-6 py-2 border border-blue-500 text-blue-500 rounded-sm hover:bg-blue-500 hover:text-white transition">
+              Home
+            </button>
+          </Link>
+          <a href="#login">
+            <button className="px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition">
+              Login
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Header

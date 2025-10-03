@@ -1,13 +1,6 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', 'Roboto', sans-serif;
-}
 
 /* Container */
-.check-attendance-container {
+ .check-attendance-container {
   padding: 30px 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -21,12 +14,12 @@
 }
 
 /* Table wrapper for horizontal scroll */
-.table-wrapper {
+.check-attendance-container .table-wrapper {
   overflow-x: auto;
 }
 
 /* Table styling */
-.attendance-table {
+.check-attendance-container .attendance-table {
   width: 100%;
   border-collapse: collapse;
   min-width: 600px;
@@ -36,15 +29,15 @@
   box-shadow: 0 6px 18px rgba(0,0,0,0.05);
 }
 
-.attendance-table th,
-.attendance-table td {
+.check-attendance-container .attendance-table th,
+.check-attendance-container .attendance-table td {
   padding: 10px 12px;
   text-align: center;
   border-bottom: 1px solid #e0e0e0;
   font-size: 14px;
 }
 
-.attendance-table th {
+.check-attendance-container .attendance-table th {
   background-color: #2f80ed;
   color: #fff;
   font-weight: 500;
@@ -55,23 +48,23 @@
   z-index: 1;
 }
 
-.attendance-table tr:hover {
+.check-attendance-container .attendance-table tr:hover {
   background-color: #f1f4f8;
 }
 
 /* Present / Absent colors */
-.present {
+.check-attendance-container .present {
   color: #27ae60;
   font-weight: 600;
 }
 
-.absent {
+.check-attendance-container .absent {
   color: #eb5757;
   font-weight: 600;
 }
 
 /* No data message */
-.no-data {
+.check-attendance-container .no-data {
   text-align: center;
   margin-top: 50px;
   font-size: 16px;
@@ -80,8 +73,8 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .attendance-table th,
-  .attendance-table td {
+ .check-attendance-container .attendance-table th,
+ .check-attendance-container .attendance-table td {
     padding: 8px 10px;
     font-size: 13px;
   }
