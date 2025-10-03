@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const collegeSlice = createSlice({
     name:"college",
-    initialState:{subject:'' , data : [] , roll_no:null},
+    initialState:{subject:'' , data : [] , roll_no:null , attendance:[]},
     reducers:{
         setSubject : (state , action)=>{
             state.subject=action.payload
@@ -12,10 +12,13 @@ const collegeSlice = createSlice({
         },
         set_roll_no : (state , action)=>{
             state.roll_no=action.payload
+        },
+        setAttendance : (state , action )=>{
+            state.attendance = action.payload
         }
     }
 })
 
-export const {setSubject ,setData , set_roll_no} = collegeSlice.actions;
+export const {setSubject ,setData , set_roll_no ,setAttendance} = collegeSlice.actions;
 
 export default collegeSlice.reducer;
