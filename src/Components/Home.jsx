@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./css/Home.css"; // CSS is in css folder
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
+    <>
+    <Header/>
     <div className="home-container">
       <div className="home-card">
         <h1>College Attendance Manager</h1>
@@ -19,6 +23,8 @@ const Home = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

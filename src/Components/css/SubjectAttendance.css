@@ -1,7 +1,7 @@
 .attendance-container {
-  max-width: 700px;
+  max-width: 800px;
   margin: 30px auto;
-  padding: 20px;
+  padding: 25px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
@@ -11,13 +11,34 @@
 .attendance-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 24px;
   color: #1e1e2f;
+}
+
+.attendance-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.circular-progress {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+.summary p {
+  margin: 5px 0;
+  font-weight: 500;
+  color: #333;
 }
 
 /* Table wrapper for horizontal scroll on small screens */
 .table-wrapper {
   overflow-x: auto;
+  margin-bottom: 25px;
 }
 
 .attendance-table {
@@ -62,7 +83,61 @@
   font-style: italic;
 }
 
+/* Query Form */
+.query-form {
+  margin-top: 30px;
+}
+
+.query-form h3 {
+  margin-bottom: 10px;
+  color: #2f80ed;
+}
+
+.query-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.query-form button {
+  padding: 10px 20px;
+  background-color: #2f80ed;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.query-form button:hover {
+  background-color: #1366d6;
+}
+
+.message {
+  margin-top: 8px;
+  color: #27ae60;
+  font-weight: 500;
+}
+
 /* Responsive */
+@media (max-width: 768px) {
+  .attendance-overview {
+    flex-direction: column;
+  }
+
+  .circular-progress {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 @media (max-width: 480px) {
   .attendance-container {
     padding: 15px;
@@ -76,5 +151,9 @@
 
   .attendance-container h2 {
     font-size: 20px;
+  }
+
+  .query-form textarea {
+    min-height: 80px;
   }
 }
