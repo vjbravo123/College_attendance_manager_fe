@@ -9,7 +9,7 @@
 
 Welcome to the **College Attendance Manager Frontend**! This responsive React application provides students and teachers a smooth and interactive experience to manage attendance efficiently.
 
-<img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Frontend GIF" width="400" />
+<img src="https://imgs.search.brave.com/Trt80ptrA3Px1lTWlEpw4ZHu1UZnQ0OlqagXXjcA4Xg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzkxLzQ4Lzg4/LzM2MF9GXzI5MTQ4/ODg4NV9xaXhrVGVL/dFFjdW92NG9idzdW/WEo1ZHdqd0k5TEtL/Mi5qcGc" alt="Frontend GIF" width="400" />
 
 ## 🎯 Features
 
