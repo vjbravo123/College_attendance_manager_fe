@@ -14,6 +14,7 @@ import StudentDashboard from './Components/StudentDashboard.jsx'
 import SubjectAttendance from './Components/SubjectAttendance.jsx'
 import TeacherWelcome from './Components/TeacherPage.jsx'
 import StudentWelcome from './Components/StudentPage.jsx'
+import QueryReviewPage from './Components/QueryReviewPage.jsx'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path:'/queries',
     element:<StudentQueries/>
+  },
+  {
+    path:'/queryAttendanceReview',
+    element:<QueryReviewPage/>
   }
   ,
   {

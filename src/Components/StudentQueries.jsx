@@ -1,47 +1,98 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setQueryStudentID } from "../Store/CollegeSlice";
+import {Link} from 'react-router-dom';
+const StudentQueries = () => {  
+  const dispatch = useDispatch();
+  const subject = useSelector(state=>state.subject);
+  const [queries, setQueries] = useState([]);
 
-const StudentQueries = () => {
-  const [queries, setQueries] = useState([
-    { id: 1, query: "I think my attendance is miscalculated for Math class." },
-    { id: 2, query: "Can you please update attendance for 25th Sept?" },
-    { id: 3, query: "My attendance in Physics shows absent but I was present." },
-  ]);
+  const fetchQueries =async () =>{
+      let uri =`http://localhost:8080/attendance/getAllQueries/${subject}`
+      
+      const {data} = await axios.get(uri);
+      setQueries(data)
+      // console.log(data);
+      
+    }
+  useEffect(()=>{
+    fetchQueries();
+  } , [])
 
-  const handleCheckAttendance = () => {
-    alert("Redirecting to attendance page...");
+  const handleCheckAttendance = (student_id) => {
+      dispatch(setQueryStudentID(student_id));
+
+  };
+
+  const handleAction = async(id) => {
+    const {data} = await axios.delete(`http://localhost:8080/attendance/deleteQuery/${id}`)
+
+    if(data.queryDeleted){
+      alert(data.message);
+    }
+    fetchQueries();
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">
+    <div className="p-4 sm:p-6 bg-gray-100 min-h-screen">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md p-6">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">
           Student Queries
         </h1>
 
-        {/* Queries List */}
-        <div className="space-y-4">
-          {queries.length > 0 ? (
-            queries.map((q) => (
-              <div
-                key={q.id}
-                className="border rounded-lg p-4 bg-gray-50 hover:shadow-sm transition"
-              >
-                <p className="text-gray-700">{q.query}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500">No queries available.</p>
-          )}
-        </div>
-
-        {/* Attendance Button */}
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={handleCheckAttendance}
-            className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition"
-          >
-            Check Attendance
-          </button>
+        {/* Responsive Table */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full border border-gray-200">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="text-left py-3 px-4 border-b">Name</th>
+                <th className="text-left py-3 px-4 border-b">Roll No.</th>
+                <th className="text-left py-3 px-4 border-b">Query</th>
+                <th className="text-center py-3 px-4 border-b">
+                  Check Attendance
+                </th>
+                <th className="text-center py-3 px-4 border-b">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {queries.length > 0 ? (
+                queries.map((q) => (
+                  <tr key={q.id} className="hover:bg-gray-50">
+                    <td className="py-3 px-4 border-b">{q.name}</td>
+                    <td className="py-3 px-4 border-b">{q.rollNo}</td>
+                    <td className="py-3 px-4 border-b">{q.query}</td>
+                    <td className="py-3 px-4 border-b text-center">
+                      <Link 
+                        to={'/queryAttendanceReview'}
+                        onClick={() => handleCheckAttendance(q.student_id)}
+                        className="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+                      >
+                        Check
+                      </Link>
+                    </td>
+                    <td className="py-3 px-4 border-b text-center">
+                      <button
+                        onClick={() => handleAction(q.id)}
+                        className="px-3 py-1 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                      >
+                        Resolve
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="py-4 px-4 text-center text-gray-500"
+                  >
+                    No queries available.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
