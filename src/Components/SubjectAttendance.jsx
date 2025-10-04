@@ -6,6 +6,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 const SubjectAttendance = () => {
+  const uri = import.meta.env.VITE_API_URL;
   const [attendanceRecord, setAttendanceRecord] = useState([]);
   const [query, setQuery] = useState('');
   const [message, setMessage] = useState('');
@@ -15,7 +16,7 @@ const SubjectAttendance = () => {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8080/attendance/${subject}/${roll_no}`);
+        const { data } = await axios.get(`${uri}/attendance/${subject}/${roll_no}`);
         setAttendanceRecord(data);
       } catch (err) {
         console.error(err);
@@ -29,7 +30,7 @@ const SubjectAttendance = () => {
     if (!query.trim()) return;
 
     try {
-      await axios.post(`http://localhost:8080/attendance/query`, { roll_no, subject, query });
+      await axios.post(`${uri}/attendance/query`, { roll_no, subject, query });
       setMessage("Query submitted successfully!");
       setQuery('');
     } catch (err) {

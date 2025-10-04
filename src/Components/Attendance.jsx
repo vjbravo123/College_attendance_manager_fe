@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 const Attendance = () => {
+  const uri = import.meta.env.VITE_API_URL;
   const rowdata = useSelector((state) => state.data);
   const subject = useSelector((state) => state.subject);
 
@@ -29,7 +30,7 @@ const Attendance = () => {
 
   const handleSubmit = async () => {
     try {
-      const { data } = await axios.post("http://localhost:8080/attendance/takeAttendance", {
+      const { data } = await axios.post(`${uri}/attendance/takeAttendance`, {
         students: rowdata,
         AttendanceMap: attendance,
         subject: subject,

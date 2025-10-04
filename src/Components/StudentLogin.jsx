@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { set_roll_no } from '../Store/CollegeSlice';
 
 const StudentLogin = () => {
+  const uri = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,7 +14,7 @@ const StudentLogin = () => {
 
   async function handleLogin() {
     try {
-      const { data } = await axios.post('http://localhost:8080/auth/studentLogin', { username, password });
+      const { data } = await axios.post(`${uri}/auth/studentLogin`, { username, password });
       if (data.validUser) {
         localStorage.setItem('token', data.token);
         dispatch(set_roll_no(data.roll_no));

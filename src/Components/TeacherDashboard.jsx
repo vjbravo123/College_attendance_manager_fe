@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAttendance, setData } from "../Store/CollegeSlice";
 
 const TeacherDashboard = () => {
+  const uri = import.meta.env.VITE_API_URL;
+  const subject = useSelector(state=>state.subject);
   const dispatch = useDispatch();
 
   async function handleClick() {
-    const { data } = await axios.get(`http://localhost:8080/attendance/attendanceData/`);
+    const { data } = await axios.get(`${uri}/attendance/attendanceData/`);
     if (data) {
       dispatch(setData(data));
       console.log(data);
@@ -15,7 +17,7 @@ const TeacherDashboard = () => {
   }
 
   async function handleCheckAttendance() {
-    const { data } = await axios.get('http://localhost:8080/attendance/getMonthlyAttendace');
+    const { data } = await axios.get(`${uri}/attendance/getMonthlyAttendace/${subject}`);
     dispatch(setAttendance(data));
   }
 

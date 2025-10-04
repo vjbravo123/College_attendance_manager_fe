@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setSubject } from '../Store/CollegeSlice';
 
 const TeacherLogin = () => {
+  const uri = import.meta.env.VITE_API_URL
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,14 +14,16 @@ const TeacherLogin = () => {
 
   async function handleLogin() {
     try {
-      const { data } = await axios.post('http://localhost:8080/auth/teacherLogin', { username, password });
+      const { data } = await axios.post(`${uri}/auth/teacherLogin`, { username, password });
       if (data.validUser) {
+        console.log("heelo");
+        
         localStorage.setItem('token', data.token);
         dispatch(setSubject(data.subject));
         navigate('/TeacherDashboard');
         alert('Login Successful');
       } else {
-        alert('Invalid Credentials');
+        alert(data.message);
       }
     } catch (error) {
       console.error(error);

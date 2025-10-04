@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
 const StudentDashboard = () => {
+  const uri = import.meta.env.VITE_API_URL;
   const [subjectList, setSubjectList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSubjectList() {
       try {
-        const { data } = await axios.get('http://localhost:8080/attendance/subjectlist');
+        const { data } = await axios.get(`${uri}/attendance/subjectlist`);
         setSubjectList(data);
       } catch (err) {
         console.error(err);

@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setQueryStudentID } from "../Store/CollegeSlice";
 import {Link} from 'react-router-dom';
-const StudentQueries = () => {  
+const StudentQueries = () => { 
+  const uri = import.meta.env.VITE_API_URL; 
   const dispatch = useDispatch();
   const subject = useSelector(state=>state.subject);
   const [queries, setQueries] = useState([]);
 
   const fetchQueries =async () =>{
-      let uri =`http://localhost:8080/attendance/getAllQueries/${subject}`
+      let uri =`${uri}/attendance/getAllQueries/${subject}`
       
       const {data} = await axios.get(uri);
       setQueries(data)
@@ -26,7 +27,7 @@ const StudentQueries = () => {
   };
 
   const handleAction = async(id) => {
-    const {data} = await axios.delete(`http://localhost:8080/attendance/deleteQuery/${id}`)
+    const {data} = await axios.delete(`${uri}/attendance/deleteQuery/${id}`)
 
     if(data.queryDeleted){
       alert(data.message);

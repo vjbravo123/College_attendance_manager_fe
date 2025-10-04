@@ -1,15 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const TeacherWelcome = () => {
+  const uri = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    subject: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      // Replace with your API endpoint
+      const {data} = await axios.post(`${uri}/auth/teacherSignup`, {formData});
+      if(data.signedUp){
+        alert("Signup completed");
+        navigate("/TeacherLogin");
+      }else{
+        alert(data.message)
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error signing up. Please try again.");
+    }
+  };
+
   return (
     <>
       <Header />
       <div className="w-full flex flex-col">
         {/* Hero Section */}
-        <section className="flex flex-col-reverse md:flex-row items-center justify-between">
+        <section className="flex flex-col-reverse md:flex-row items-center justify-between min-h-screen">
           {/* Left Content */}
           <div className="md:w-1/2 text-center md:text-left px-6 md:px-16 py-10 space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">
@@ -30,9 +60,12 @@ const TeacherWelcome = () => {
               >
                 Login
               </Link>
-              <button className="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium px-6 py-2 rounded-md transition">
-                Learn
-              </button>
+              <a
+                href="#teacher-signup"
+                className="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium px-6 py-2 rounded-md transition"
+              >
+                Signup
+              </a>
             </div>
           </div>
 
@@ -41,32 +74,63 @@ const TeacherWelcome = () => {
             <img
               src="https://exciting-python.10web.cloud/wp-content/uploads/2025/10/tenweb_media_sb4pqsasu.webp"
               alt="Teachers in classroom"
-              className="w-full h-[70vh] object-cover md:rounded-none rounded-b-md"
+              className="w-full h-[70vh] md:h-full object-cover md:rounded-none rounded-b-md"
             />
           </div>
         </section>
 
-        {/* Teacher Login Section */}
-        <section className="text-center px-6 md:px-16 py-12 bg-gray-50">
+        {/* Teacher Signup Section */}
+        <section
+          id="teacher-signup"
+          className="text-center px-6 md:px-16 py-16 bg-gray-50"
+        >
           <h2 className="text-2xl md:text-3xl font-bold">
-            Teacher Login Access
+            Teacher Signup Access
           </h2>
           <p className="text-gray-600 mt-3 mb-6">
-            Securely log in to manage attendance and view your dashboard
-            efficiently.
+            Create your account to securely manage attendance and access your
+            dashboard.
           </p>
 
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link
-              to={"/TeacherLogin"}
+          <form
+            onSubmit={handleSignup}
+            className="max-w-md mx-auto flex flex-col gap-4"
+          >
+            <input
+              type="text"
+              name="username"
+              placeholder="Full Name"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Add your subject"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <button
+              type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-md transition"
             >
-              Login to Dashboard
-            </Link>
-            <button className="border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium px-6 py-2 rounded-md transition">
-              Need Help?
+              Signup
             </button>
-          </div>
+          </form>
         </section>
       </div>
       <Footer />

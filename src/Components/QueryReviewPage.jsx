@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const QueryReviewPage = () => {
+  const uri = import.meta.env.VITE_API_URL;
   const student_id = useSelector((state) => state.queryStudentid);
   const subject = useSelector((state) => state.subject);
   const [attendance, setAttendance] = useState([]);
@@ -11,7 +12,7 @@ const QueryReviewPage = () => {
     const fetchAttendance = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8080/query/queryReview/${student_id}/${subject}`
+          `${uri}/query/queryReview/${student_id}/${subject}`
         );
         setAttendance(data);
         console.log(data);
@@ -32,7 +33,7 @@ const QueryReviewPage = () => {
   const handleSave = async (record) => {
     try {
       await axios.put(
-        `http://localhost:8080/query/changeAttendance/${record._id}`,
+        `${uri}/query/changeAttendance/${record._id}`,
         { status: record.status }
       );
       alert("Attendance updated successfully!");

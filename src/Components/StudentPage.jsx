@@ -2,17 +2,26 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-
+import axios from 'axios';
 export default function StudentSignupPage() {
+  const uri = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [form, setForm] = useState({ username: "", password: "", roll_no: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup:", form);
-    navigate("/studentslogin");
+    const {data} = await axios.post(`${uri}/auth/studentSignup` , {
+      form
+    });
+    if(data.signedUp){
+      navigate("/studentslogin");
+    }
+    else{
+      alert(data.message);
+    }
+    
   };
 
   return (
