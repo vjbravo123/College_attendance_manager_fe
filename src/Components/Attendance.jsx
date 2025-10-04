@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import './css/Attendance.css';
 
 const Attendance = () => {
   const rowdata = useSelector((state) => state.data);
@@ -54,42 +53,53 @@ const Attendance = () => {
   };
 
   return (
-    <div className="attendance-container">
-      <h2>Take Attendance - {subject}</h2>
-      <div className="table-wrapper">
-        <table className="attendance-table">
+    <div className="px-5 py-8 max-w-4xl mx-auto bg-gray-100 min-h-screen">
+      <h2 className="text-center mb-6 text-gray-800 font-semibold text-2xl">
+        Take Attendance - {subject}
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Roll No</th>
-              <th>Attendance</th>
+            <tr className="bg-blue-600 text-white uppercase tracking-wide text-sm">
+              <th className="px-4 py-3">Name</th>
+              <th className="px-4 py-3">Roll No</th>
+              <th className="px-4 py-3">Attendance</th>
             </tr>
           </thead>
           <tbody>
             {rowdata && rowdata.length > 0 ? (
               rowdata.map((r) => (
-                <tr key={r.roll_no}>
-                  <td>{r.name}</td>
-                  <td>{r.roll_no}</td>
-                  <td>
+                <tr key={r.roll_no} className="border-b border-gray-200 text-center">
+                  <td className="px-4 py-3">{r.name}</td>
+                  <td className="px-4 py-3">{r.roll_no}</td>
+                  <td className="px-4 py-3">
                     <input
                       type="checkbox"
                       checked={attendance[r.roll_no] || false}
                       onChange={() => handleCheckBoxChange(r.roll_no)}
+                      className="w-5 h-5 cursor-pointer accent-blue-600"
                     />
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="3" className="no-data">No data found</td>
+                <td colSpan="3" className="py-5 text-gray-500 text-center">
+                  No data found
+                </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
 
-      <button className="submit-btn" onClick={handleSubmit}>Submit Attendance</button>
+      <button
+        onClick={handleSubmit}
+        className="block mx-auto mt-6 px-6 py-3 text-white bg-blue-600 rounded-lg font-medium text-lg shadow-sm hover:bg-blue-700 hover:-translate-y-0.5 transform transition"
+      >
+        Submit Attendance
+      </button>
     </div>
   );
 };

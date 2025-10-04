@@ -3,55 +3,72 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { set_roll_no } from '../Store/CollegeSlice';
-import './css/StudentLogin.css';
 
 const StudentLogin = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const [username, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
-    async function handleLogin() {
-        try {
-            const { data } = await axios.post('http://localhost:8080/auth/studentLogin', { username, password });
-            if (data.validUser) {
-                localStorage.setItem('token', data.token);
-                dispatch(set_roll_no(data.roll_no));
-                alert('Login Successful');
-                navigate('/StudentDashboard');
-            } else {
-                alert('Invalid Credentials');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('Login failed. Please try again.');
-        }
+  async function handleLogin() {
+    try {
+      const { data } = await axios.post('http://localhost:8080/auth/studentLogin', { username, password });
+      if (data.validUser) {
+        localStorage.setItem('token', data.token);
+        dispatch(set_roll_no(data.roll_no));
+        alert('Login Successful');
+        navigate('/StudentDashboard');
+      } else {
+        alert('Invalid Credentials');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Login failed. Please try again.');
     }
+  }
 
-    return (
-        <div className="login-container">
-            <div className="login-card">
-                <h2>Student Login</h2>
-                <p>Enter your credentials to continue</p>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUserName(e.target.value)}
-                    className="login-input"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="login-input"
-                />
-                <button className="login-btn" onClick={handleLogin}>Login</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+      <div className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md text-center animate-fadeIn">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">Student Login</h2>
+        <p className="text-gray-500 text-sm md:text-base mb-8">Enter your credentials to continue</p>
+
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          className="w-full p-3 mb-4 rounded-md border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-400 outline-none transition"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-3 mb-6 rounded-md border border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-400 outline-none transition"
+        />
+
+        <button
+          onClick={handleLogin}
+          className="w-full py-3 font-semibold rounded-lg text-lg text-white transition transform hover:scale-105 hover:opacity-90 active:scale-95"
+          style={{ background: 'linear-gradient(135deg, #4b6cb7, #182848)' }}
+        >
+          Login
+        </button>
+
+        <style>
+          {`
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(-15px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fadeIn { animation: fadeIn 0.8s ease-in-out; }
+          `}
+        </style>
+      </div>
+    </div>
+  );
 };
 
 export default StudentLogin;

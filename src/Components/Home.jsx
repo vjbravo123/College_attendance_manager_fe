@@ -28,7 +28,7 @@ const Home = () => {
   return (
    <>
    
-     <div className="flex flex-col md:flex-row min-h-screen">
+     <div className="flex flex-col bg-black pt-20 md:flex-row min-h-screen">
       {/* Left Section */}
       <div className="w-full md:w-1/2 bg-black text-white flex flex-col justify-center px-6 md:px-16 lg:px-28 py-10">
         
